@@ -44,6 +44,5 @@ See server/.env.example
 MIT
 ### Tools
 
-- Git
 - GitHub
 - VS Code
