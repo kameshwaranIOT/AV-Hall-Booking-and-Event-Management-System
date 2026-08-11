@@ -42,7 +42,3 @@ See server/.env.example
 
 ## License
 MIT
-### Tools
-
-- GitHub
-- VS Code
