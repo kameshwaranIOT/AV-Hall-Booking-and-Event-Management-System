@@ -12,7 +12,20 @@ import ProfilePage from './pages/ProfilePage';
 import NotFoundPage from './pages/NotFoundPage';
 import Layout from './layouts/Layout';
 
-const theme = createTheme({ palette: { mode: 'light' } });
+const theme = createTheme({
+  palette: { mode: 'light' },
+  typography: {
+    fontFamily: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'].join(','),
+    h1: { fontFamily: ['Playfair Display', 'Georgia', 'serif'].join(','), fontWeight: 700 },
+    h2: { fontFamily: ['Playfair Display', 'Georgia', 'serif'].join(','), fontWeight: 700 },
+    h3: { fontFamily: ['Playfair Display', 'Georgia', 'serif'].join(','), fontWeight: 600 },
+    h4: { fontFamily: ['Playfair Display', 'Georgia', 'serif'].join(','), fontWeight: 600 },
+    h5: { fontFamily: ['Playfair Display', 'Georgia', 'serif'].join(','), fontWeight: 500 },
+    h6: { fontFamily: ['Playfair Display', 'Georgia', 'serif'].join(','), fontWeight: 500 },
+    body1: { fontFamily: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'].join(',') },
+    body2: { fontFamily: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'].join(',') },
+  },
+});
 
 const ProtectedRoute = ({ children, adminOnly = false }) => {
   const { user, loading } = useAuth();
