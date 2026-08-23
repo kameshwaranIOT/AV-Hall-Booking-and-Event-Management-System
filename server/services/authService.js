@@ -58,6 +58,12 @@ export const updateProfileService = async (userId, data) => {
   return user;
 };
 
+export const updateProfileImageService = async (userId, imagePath) => {
+  const user = await User.findByIdAndUpdate(userId, { profileImage: imagePath }, { new: true }).select('-password');
+  if (!user) throw new AppError('User not found', 404);
+  return user;
+};
+
 export const changePasswordService = async (userId, currentPassword, newPassword) => {
   const user = await User.findById(userId).select('+password');
   if (!user) throw new AppError('User not found', 404);

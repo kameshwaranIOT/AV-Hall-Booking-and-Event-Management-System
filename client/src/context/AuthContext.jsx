@@ -29,7 +29,9 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  return <AuthContext.Provider value={{ user, loading, login, logout }}>{children}</AuthContext.Provider>;
+  const updateUser = (userData) => setUser(userData);
+
+  return <AuthContext.Provider value={{ user, loading, login, logout, updateUser }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);
