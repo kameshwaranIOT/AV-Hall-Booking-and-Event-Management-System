@@ -1,15 +1,36 @@
 version: '3.8'
 services:
+  mongo:
+    image: mongo:6
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+
   server:
-    build: .
+    build:
+      context: ./server
     ports:
       - '5000:5000'
     environment:
       - PORT=5000
       - MONGO_URI=mongodb://mongo:27017/av-hall-booking
+      - JWT_SECRET=supersecretjwtkey
+      - JWT_REFRESH_SECRET=supersecretrefreshkey
+      - CLIENT_URL=http://localhost:3000
     depends_on:
       - mongo
-  mongo:
-    image: mongo:6
+
+  client:
+    build:
+      context: ./client
     ports:
-      - '27017:27017'
+      - '3000:3000'
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_API_URL=http://localhost:5000/api
+    depends_on:
+      - server
+
+volumes:
+  mongo_data:
