@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
 import connectDB from './config/db.js';
+import Hall from './models/Hall.js';
 import authRoutes from './routes/authRoutes.js';
 import hallRoutes from './routes/hallRoutes.js';
 import bookingRoutes from './routes/bookingRoutes.js';
@@ -15,7 +16,45 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './config/swagger.js';
 
 dotenv.config();
-connectDB();
+
+const seedDefaultHalls = async () => {
+  try {
+    const hallCount = await Hall.countDocuments();
+    if (hallCount === 0) {
+      await Hall.insertMany([
+        {
+          hallName: 'Main Auditorium',
+          capacity: 300,
+          location: 'Building A',
+          description: 'Large auditorium with stage, projector, and sound system.',
+          equipment: ['Projector', 'Sound System', 'Stage Lighting'],
+          status: 'available',
+        },
+        {
+          hallName: 'Conference Room 1',
+          capacity: 40,
+          location: 'Building B',
+          description: 'Medium-sized conference room for meetings and workshops.',
+          equipment: ['Whiteboard', 'Conference Phone'],
+          status: 'available',
+        },
+        {
+          hallName: 'Training Hall',
+          capacity: 120,
+          location: 'Building C',
+          description: 'Training hall with multiple seating arrangements and AV support.',
+          equipment: ['Projector', 'Microphones', 'Video Conferencing'],
+          status: 'available',
+        },
+      ]);
+      console.log('Sample halls seeded successfully.');
+    }
+  } catch (error) {
+    console.error('Hall seeding error:', error.message);
+  }
+};
+
+connectDB().then(seedDefaultHalls);
 
 const app = express();
 app.use(helmet());

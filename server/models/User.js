@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true, select: false },
   department: { type: String, default: '' },
   phone: { type: String, default: '' },
-  role: { type: String, enum: ['admin', 'user'], default: 'user' },
+  role: { type: String, enum: ['admin', 'organizer', 'faculty', 'student', 'viewer', 'user'], default: 'student' },
   profileImage: { type: String, default: '' },
   isVerified: { type: Boolean, default: false },
   resetPasswordToken: String,
