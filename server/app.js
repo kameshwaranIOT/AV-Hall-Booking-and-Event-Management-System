@@ -62,6 +62,12 @@ app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:3000' }));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
+app.get('/', (req, res) => {
+  res.json({
+    message: 'AV Hall Booking API is running',
+    docs: '/api/docs',
+  });
+});
 app.use('/api/auth', authRoutes);
 app.use('/api/halls', hallRoutes);
 app.use('/api/bookings', bookingRoutes);
