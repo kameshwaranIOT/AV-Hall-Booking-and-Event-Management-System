@@ -22,6 +22,10 @@ A production-ready full-stack web application for managing AV hall bookings, eve
 4. Start the client:
    - cd client && npm start
 
+The client uses `REACT_APP_API_URL` for the backend base URL. For local development,
+copy `client/.env.example` to `client/.env` or use the default
+`http://localhost:5000/api` value. The backend allows requests from `CLIENT_URL`.
+
 ## Environment Variables
 See server/.env.example
 
