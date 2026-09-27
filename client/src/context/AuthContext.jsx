@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 
 const AuthContext = createContext();
 
@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
       return;
     }
-    axios.get('http://localhost:5000/api/auth/profile', { headers: { Authorization: `Bearer ${token}` } })
+    api.get('/auth/profile')
       .then(res => setUser(res.data.data))
       .catch(() => localStorage.removeItem('token'))
       .finally(() => setLoading(false));
